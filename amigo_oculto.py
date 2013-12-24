@@ -44,11 +44,16 @@ for k in mainList:
     print j, len(j), x
 """
 
-print "My list:"
-mainList.sort(key=lambda position:len(position[-1].split(', ')), reverse=True)
-# Above line sorts by number of restrictions, but empty restrictions preceeds
-# single restrictions and need to be corrected manually.
+"""
+ Reordenar lista para sortear primeiro os participantes que possuem mais
+ restrições
+"""
 
+# Sorts by number of restrictions, but empty restrictions preceeds single
+# restrictions and need to be corrected manually.
+mainList.sort(key=lambda position:len(position[-1].split(', ')), reverse=True)
+
+# Changes blank restrictions to last positions.
 blankList=[]
 for subList in mainList:
   if len(subList[-1]) == 0:
@@ -57,13 +62,12 @@ for subList in mainList:
 
 for l in blankList:
   mainList.append(l)
-# Changed blank restrictions to last positions
 
+
+print "My list:"
 for l in mainList:
   print l
 print "end of file..."
-
-
 
 """
 params = []
@@ -76,16 +80,13 @@ for label in labels:
 """
 
 
-"""
- Reordenar lista para sortear primeiro os participantes que possuem mais
- restrições
-"""
-
-
 # Passo 2: Fazer sorteio, retirando os números sorteados da lista;
 """ Observar as restrições:
     - não pode sair consigo mesmo;
     - não pode sair com alguém que está na sua lista de restrições;
 """
 
+
+
 # Passo 3: Enviar email para os participantes com o amigo a ser presenteado;
+
