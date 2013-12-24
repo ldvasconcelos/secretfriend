@@ -7,12 +7,14 @@
 """
 import csv
 import sys
+#from person import Person
 
 # variables
 mainList = []		# contains the data
 labels = []			# contains the headers of each column on csv
 i=0
 
+print "\nFile content:"
 f = open(sys.argv[1], 'rb') # opens the csv file
 try:
   reader = csv.reader(f) 		# creates the reader object
@@ -25,15 +27,54 @@ try:
   	i+=1
 finally:
   f.close()      						# closing
+print "Done reading, closed file\n"
 
+"""
 print "---"
 print "Labels:"
 print labels
+
+x=0
+for k in mainList:
+  for j in k:
+    if len(j)==0:
+      x=0
+    else:
+      x=len(j.split(', '))
+    print j, len(j), x
+"""
+
 print "My list:"
-mainList.sort(key=lambda position: position[3])
-# doing: alphabetic sort of restrictions
-# TODO: sort by number of restrictions...
-print mainList
+mainList.sort(key=lambda position:len(position[-1].split(', ')), reverse=True)
+# Above line sorts by number of restrictions, but empty restrictions preceeds
+# single restrictions and need to be corrected manually.
+
+blankList=[]
+for subList in mainList:
+  if len(subList[-1]) == 0:
+    blankList.append(subList)
+    mainList.remove(subList)
+
+for l in blankList:
+  mainList.append(l)
+# Changed blank restrictions to last positions
+
+for l in mainList:
+  print l
+print "end of file..."
+
+
+
+"""
+params = []
+for label in labels:
+#  print label
+  for att in label:
+    print att
+
+#candidate = Person()
+"""
+
 
 """
  Reordenar lista para sortear primeiro os participantes que possuem mais
